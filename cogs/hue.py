@@ -12,8 +12,8 @@ b.connect()
 b.get_api()
 
 class Hue(commands.Cog):
-    def __init__(self, client):
-        self.client = client
+    def __init__(self, bot):
+        self.bot = bot
 
 # Hue_toggle
     @commands.command(
@@ -24,11 +24,11 @@ class Hue(commands.Cog):
     async def hue_toggle(self, ctx):
         await ctx.send("What do you want to control, a light or group?")
 
-        msg = await self.client.wait_for('message',)
+        msg = await self.bot.wait_for('message',)
 
         if msg.content == "light" or msg.content == "Light":
             await ctx.send("What is the name of the light? (for a list of available lights do !hue_get_list)")
-            msg = await self.client.wait_for('message',)
+            msg = await self.bot.wait_for('message',)
             if b.get_light(msg.content, 'on') == True:
                 b.set_light(msg.content ,'on', False)
                 await ctx.send(f"{msg.content} has been turned off.")
@@ -38,7 +38,7 @@ class Hue(commands.Cog):
                 
         elif msg.content == "group" or msg.content == "Group":
             await ctx.send("What is the name of the group? (for a list of available groups do !hue_get_list)")
-            msg = await self.client.wait_for('message',)
+            msg = await self.bot.wait_for('message',)
             if b.get_group(msg.content, 'on') == True:
                 b.set_group(msg.content ,'on', False)
                 await ctx.send(f"{msg.content} has been turned off.")
@@ -58,7 +58,7 @@ class Hue(commands.Cog):
     async def hue_get_list(self, ctx):
         await ctx.send("Where do you want to get a list from, lights or groups?")
 
-        msg = await self.client.wait_for('message',)
+        msg = await self.bot.wait_for('message',)
 
         if msg.content == "light" or msg.content == "lights":
             lights = b.lights
@@ -77,5 +77,5 @@ class Hue(commands.Cog):
         else:
             await ctx.send("This isn't a valid option choose between groups or lights.")
 
-def setup(client):
-    client.add_cog(Hue(client))
+def setup(bot):
+    bot.add_cog(Hue(bot))

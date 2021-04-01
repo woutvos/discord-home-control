@@ -2,8 +2,8 @@ import discord
 from discord.ext import commands
 
 class NetworkScan(commands.Cog):
-    def __init__(self, client):
-        self.client = client
+    def __init__(self, bot):
+        self.bot = bot
 
-def setup(client):
-    client.add_cog(NetworkScan(client))
+def setup(bot):
+    bot.add_cog(NetworkScan(bot))
