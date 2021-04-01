@@ -1,1 +1,1 @@
-# discord-home-control
+This is one of the first versions of the Home Control bot, a further detailed tutorial is coming. The bot is currently working, but I do not provide any support at the moment.
